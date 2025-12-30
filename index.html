@@ -3,122 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile UI</title>
+<title>Profile</title>
 <style>
     :root {
-        --bg: #f1f3f5;
-        --card-bg: #ffffff;
-        --text: #222;
-        --accent: #3f7dff;
+        --bg: #e6e9ee;
+        --card: #ffffff;
+        --text: #1a1a1a;
+        --muted: #4a4a4a;
+        --accent: #0066ff;
+        --round: 18px;
     }
     [data-theme="dark"] {
-        --bg: #1c1f23;
-        --card-bg: #2a2e32;
-        --text: #eaeaea;
-        --accent: #7aa8ff;
+        --bg: #1a1d21;
+        --card: #2a2e33;
+        --text: #f2f4f6;
+        --muted: #9ea4aa;
+        --accent: #5fa7ff;
     }
 
+    * { box-sizing: border-box; }
+
     body {
-        font-family: sans-serif;
-        background: var(--bg);
         margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
         display: flex;
-        height: 100vh;
         justify-content: center;
         align-items: center;
-        transition: background 0.3s;
+        min-height: 100vh;
+        padding: 20px;
+        transition: background .3s;
     }
-    .profile-card {
-        background: var(--card-bg);
-        padding: 2rem;
-        width: min(90%, 380px);
+
+    .profile-wrapper {
+        width: min(500px, 100%);
+        background: var(--card);
+        border-radius: var(--round);
+        box-shadow: 0 10px 30px rgba(0,0,0,.15);
+        overflow: hidden;
+        transform: translateY(0);
+        transition: transform .3s;
+    }
+
+    .profile-wrapper:hover { transform: translateY(-4px); }
+
+    .header {
+        background: var(--accent);
+        padding: 50px 0 30px;
         text-align: center;
-        border-radius: 18px;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-        transition: transform .3s, box-shadow .3s;
+        color: white;
+        position: relative;
     }
-    .profile-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 26px rgba(0,0,0,0.2);
-    }
+
     .avatar {
         width: 120px;
         height: 120px;
-        background: linear-gradient(135deg, var(--accent), #9bc2ff);
+        background: #fff;
         border-radius: 50%;
-        margin: auto;
-        margin-bottom: 1rem;
+        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 48px;
-        color: #fff;
-        font-weight: bold;
+        overflow: hidden;
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid var(--card);
     }
+
+    .avatar svg {
+        width: 80%;
+        fill: var(--accent);
+    }
+
+    .content {
+        padding: 60px 30px 35px;
+        text-align: center;
+    }
+
     .name {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        margin: .25rem 0;
         color: var(--text);
     }
-    .bio {
-        color: var(--text);
-        opacity: .75;
+
+    .username {
         font-size: .9rem;
-        margin-bottom: 1.4rem;
+        margin-top: 4px;
+        color: var(--muted);
     }
-    .social {
+
+    .bio {
+        margin: 15px 0 20px;
+        font-size: .95rem;
+        line-height: 1.45em;
+        color: var(--text);
+        opacity: .85;
+    }
+
+    .details {
         display: flex;
-        justify-content: center;
-        gap: 12px;
+        justify-content: space-evenly;
+        padding: 10px 0;
+        border-top: 1px solid rgba(100,100,100,.15);
     }
-    .social a {
-        background: var(--accent);
-        padding: .45rem .9rem;
-        border-radius: 10px;
+
+    .details div {
         font-size: .85rem;
-        color: #fff;
-        text-decoration: none;
-        transition: background .25s;
+        text-align: center;
+        color: var(--text);
     }
-    .social a:hover {
-        background: #2b5ece;
-    }
+
     button {
-        margin-top: 1rem;
-        border: none;
-        background: transparent;
+        margin: 20px 0 0;
+        padding: 10px 22px;
         font-size: .85rem;
+        background: var(--accent);
+        border: none;
+        color: white;
+        border-radius: var(--round);
         cursor: pointer;
-        color: var(--accent);
-        transition: opacity .25s;
+        transition: background .3s;
     }
-    button:hover { opacity: .7; }
+    button:hover { background: #004fcc; }
 </style>
 </head>
 
-<body>
+<body data-theme="light">
 
-<div class="profile-card">
-    <div class="avatar">Y</div> <!-- Initial for profile -->
-    <div class="name">Your Name</div>
-    <div class="bio">UI/UX Designer | Web Developer | Creator</div>
-
-    <div class="social">
-        <a href="#">LinkedIn</a>
-        <a href="#">GitHub</a>
-        <a href="#">Email</a>
+<div class="profile-wrapper">
+    <div class="header">
+        <h2>Profile</h2>
+        <div class="avatar">
+            <!-- Realistic silhouette avatar (SVG - self hosted) -->
+            <svg viewBox="0 0 128 128">
+                <circle cx="64" cy="44" r="28"></circle>
+                <path d="M16 120c0-26 21-48 48-48s48 22 48 48"></path>
+            </svg>
+        </div>
     </div>
 
-    <button onclick="toggleTheme()">Toggle Dark/Light</button>
+    <div class="content">
+        <div class="name">Your Name</div>
+        <div class="username">@username</div>
+
+        <div class="bio">
+            Web Developer • UX Design • Problem Solver<br>
+            Passionate about creating engaging user experiences.
+        </div>
+
+        <div class="details">
+            <div><strong>54</strong><br>Projects</div>
+            <div><strong>812</strong><br>Followers</div>
+            <div><strong>120</strong><br>Following</div>
+        </div>
+
+        <button onclick="toggleTheme()">Dark / Light Mode</button>
+    </div>
 </div>
 
 <script>
-    function toggleTheme() {
-        const isDark = document.body.getAttribute('data-theme') === 'dark';
-        document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    }
-    document.body.setAttribute('data-theme','light');
+function toggleTheme() {
+    const theme = document.body.getAttribute("data-theme");
+    document.body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+}
 </script>
 
 </body>
