@@ -137,6 +137,9 @@ body {
     border-radius: 10px;
     transition: width 1s ease-out;
 }
+.fill.ready {
+    width: var(--w);
+}
 
 /* CONTACT BUTTONS */
 .buttons {
@@ -215,11 +218,11 @@ body {
 </div>
 
 <script>
-// Animate skill bars on load
-document.querySelectorAll('.fill').forEach(el => {
-    setTimeout(() => {
-        el.style.width = el.style.getPropertyValue('--w');
-    }, 300);
+// Animate skill bars once page is fully loaded
+window.addEventListener("load", () => {
+    document.querySelectorAll(".fill").forEach(el => {
+        el.classList.add("ready");
+    });
 });
 </script>
 
