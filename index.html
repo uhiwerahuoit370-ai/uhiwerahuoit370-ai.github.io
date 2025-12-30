@@ -1,11 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile UI</title>
+<style>
+    :root {
+        --bg: #f1f3f5;
+        --card-bg: #ffffff;
+        --text: #222;
+        --accent: #3f7dff;
+    }
+    [data-theme="dark"] {
+        --bg: #1c1f23;
+        --card-bg: #2a2e32;
+        --text: #eaeaea;
+        --accent: #7aa8ff;
+    }
+
+    body {
+        font-family: sans-serif;
+        background: var(--bg);
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        transition: background 0.3s;
+    }
+    .profile-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        width: min(90%, 380px);
+        text-align: center;
+        border-radius: 18px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        transition: transform .3s, box-shadow .3s;
+    }
+    .profile-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 26px rgba(0,0,0,0.2);
+    }
+    .avatar {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, var(--accent), #9bc2ff);
+        border-radius: 50%;
+        margin: auto;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: #fff;
+        font-weight: bold;
+    }
+    .name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: .25rem 0;
+        color: var(--text);
+    }
+    .bio {
+        color: var(--text);
+        opacity: .75;
+        font-size: .9rem;
+        margin-bottom: 1.4rem;
+    }
+    .social {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+    .social a {
+        background: var(--accent);
+        padding: .45rem .9rem;
+        border-radius: 10px;
+        font-size: .85rem;
+        color: #fff;
+        text-decoration: none;
+        transition: background .25s;
+    }
+    .social a:hover {
+        background: #2b5ece;
+    }
+    button {
+        margin-top: 1rem;
+        border: none;
+        background: transparent;
+        font-size: .85rem;
+        cursor: pointer;
+        color: var(--accent);
+        transition: opacity .25s;
+    }
+    button:hover { opacity: .7; }
+</style>
 </head>
+
 <body>
-    <h1>hello world</h1>
+
+<div class="profile-card">
+    <div class="avatar">Y</div> <!-- Initial for profile -->
+    <div class="name">Your Name</div>
+    <div class="bio">UI/UX Designer | Web Developer | Creator</div>
+
+    <div class="social">
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Email</a>
+    </div>
+
+    <button onclick="toggleTheme()">Toggle Dark/Light</button>
+</div>
+
+<script>
+    function toggleTheme() {
+        const isDark = document.body.getAttribute('data-theme') === 'dark';
+        document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    }
+    document.body.setAttribute('data-theme','light');
+</script>
+
 </body>
 </html>
