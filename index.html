@@ -3,180 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfect Profile</title>
-
+<title>Profile</title>
 <style>
-/* THEME COLORS */
-:root {
-    --bg: #f0f2f5;
-    --card: #ffffff;
-    --text: #1c1f23;
-    --muted: #56606a;
-    --accent: #007bff;
-    --shadow: rgba(0, 0, 0, .12);
-}
-@media (prefers-color-scheme: dark) {
     :root {
-        --bg: #181a1f;
-        --card: #24272c;
-        --text: #eceef1;
-        --muted: #9ba1a7;
-        --accent: #5ba9ff;
-        --shadow: rgba(0, 0, 0, .4);
+        --bg: #e6e9ee;
+        --card: #ffffff;
+        --text: #1a1a1a;
+        --muted: #4a4a4a;
+        --accent: #0066ff;
+        --round: 18px;
     }
-}
+    [data-theme="dark"] {
+        --bg: #1a1d21;
+        --card: #2a2e33;
+        --text: #f2f4f6;
+        --muted: #9ea4aa;
+        --accent: #5fa7ff;
+    }
 
-/* STRUCTURE */
-body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    background: var(--bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 10px;
-    color: var(--text);
-}
+    * { box-sizing: border-box; }
 
-.profile {
-    background: var(--card);
-    width: 100%;
-    max-width: 680px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 35px var(--shadow);
-    animation: fadeIn .7s ease-out;
-}
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        transition: background .3s;
+    }
 
-.header {
-    background: var(--accent);
-    padding: 50px 20px 70px;
-    text-align: center;
-    color: #fff;
-    position: relative;
-}
+    .profile-wrapper {
+        width: min(500px, 100%);
+        background: var(--card);
+        border-radius: var(--round);
+        box-shadow: 0 10px 30px rgba(0,0,0,.15);
+        overflow: hidden;
+        transform: translateY(0);
+        transition: transform .3s;
+    }
 
-.avatar {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: #fff;
-    padding: 6px;
-    position: absolute;
-    bottom: -70px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .profile-wrapper:hover { transform: translateY(-4px); }
 
-.avatar svg {
-    width: 90%;
-    fill: var(--accent);
-}
+    .header {
+        background: var(--accent);
+        padding: 50px 0 30px;
+        text-align: center;
+        color: white;
+        position: relative;
+    }
 
-.content {
-    margin-top: 80px;
-    padding: 30px;
-    text-align: center;
-}
+    .avatar {
+        width: 120px;
+        height: 120px;
+        background: #fff;
+        border-radius: 50%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid var(--card);
+    }
 
-.name {
-    font-size: 1.9rem;
-    font-weight: bold;
-    margin-bottom: 4px;
-}
+    .avatar svg {
+        width: 80%;
+        fill: var(--accent);
+    }
 
-.username {
-    font-size: .95rem;
-    color: var(--muted);
-    margin-bottom: 15px;
-}
+    .content {
+        padding: 60px 30px 35px;
+        text-align: center;
+    }
 
-.bio {
-    font-size: 1rem;
-    line-height: 1.55;
-    max-width: 500px;
-    margin: 0 auto 30px;
-    color: var(--text);
-    opacity: .85;
-}
+    .name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text);
+    }
 
-/* SKILLS */
-.skills {
-    margin: 35px 0;
-    text-align: left;
-}
-.skills h3 {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-}
+    .username {
+        font-size: .9rem;
+        margin-top: 4px;
+        color: var(--muted);
+    }
 
-.skill {
-    margin-bottom: 14px;
-}
-.skill-label {
-    font-size: .9rem;
-    margin-bottom: 4px;
-    display: flex;
-    justify-content: space-between;
-    color: var(--text);
-}
-.bar {
-    width: 100%;
-    height: 8px;
-    background: #cdd4dd40;
-    border-radius: 10px;
-    overflow: hidden;
-}
-.fill {
-    height: 100%;
-    background: var(--accent);
-    width: 0;
-    border-radius: 10px;
-    transition: width 1s ease-out;
-}
-.fill.ready {
-    width: var(--w);
-}
+    .bio {
+        margin: 15px 0 20px;
+        font-size: .95rem;
+        line-height: 1.45em;
+        color: var(--text);
+        opacity: .85;
+    }
 
-/* CONTACT BUTTONS */
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 30px 0 10px;
-}
-.btn {
-    padding: 10px 20px;
-    border-radius: 50px;
-    background: var(--accent);
-    color: #fff;
-    text-decoration: none;
-    font-size: .85rem;
-    transition: .25s;
-    box-shadow: 0 4px 12px var(--shadow);
-}
-.btn:hover {
-    transform: translateY(-3px);
-}
+    .details {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 10px 0;
+        border-top: 1px solid rgba(100,100,100,.15);
+    }
 
-/* ANIMATIONS */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+    .details div {
+        font-size: .85rem;
+        text-align: center;
+        color: var(--text);
+    }
+
+    button {
+        margin: 20px 0 0;
+        padding: 10px 22px;
+        font-size: .85rem;
+        background: var(--accent);
+        border: none;
+        color: white;
+        border-radius: var(--round);
+        cursor: pointer;
+        transition: background .3s;
+    }
+    button:hover { background: #004fcc; }
 </style>
 </head>
 
-<body>
+<body data-theme="light">
 
-<div class="profile">
+<div class="profile-wrapper">
     <div class="header">
         <h2>Profile</h2>
         <div class="avatar">
-            <!-- Silhouette avatar (self-contained SVG) -->
+            <!-- Realistic silhouette avatar (SVG - self hosted) -->
             <svg viewBox="0 0 128 128">
                 <circle cx="64" cy="44" r="28"></circle>
                 <path d="M16 120c0-26 21-48 48-48s48 22 48 48"></path>
@@ -186,44 +146,28 @@ body {
 
     <div class="content">
         <div class="name">Your Name</div>
-        <div class="username">@yourname</div>
+        <div class="username">@username</div>
 
         <div class="bio">
-            Passionate developer with a focus on creating impactful digital
-            experiences through strong UI/UX and functional design.
+            Web Developer • UX Design • Problem Solver<br>
+            Passionate about creating engaging user experiences.
         </div>
 
-        <div class="skills">
-            <h3>Skills</h3>
-
-            <div class="skill">
-                <div class="skill-label">HTML <span>95%</span></div>
-                <div class="bar"><div class="fill" style="--w:95%"></div></div>
-            </div>
-            <div class="skill">
-                <div class="skill-label">CSS <span>88%</span></div>
-                <div class="bar"><div class="fill" style="--w:88%"></div></div>
-            </div>
-            <div class="skill">
-                <div class="skill-label">JavaScript <span>80%</span></div>
-                <div class="bar"><div class="fill" style="--w:80%"></div></div>
-            </div>
+        <div class="details">
+            <div><strong>54</strong><br>Projects</div>
+            <div><strong>812</strong><br>Followers</div>
+            <div><strong>120</strong><br>Following</div>
         </div>
 
-        <div class="buttons">
-            <a class="btn" href="#">Contact</a>
-            <a class="btn" href="#">Portfolio</a>
-        </div>
+        <button onclick="toggleTheme()">Dark / Light Mode</button>
     </div>
 </div>
 
 <script>
-// Animate skill bars once page is fully loaded
-window.addEventListener("load", () => {
-    document.querySelectorAll(".fill").forEach(el => {
-        el.classList.add("ready");
-    });
-});
+function toggleTheme() {
+    const theme = document.body.getAttribute("data-theme");
+    document.body.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+}
 </script>
 
 </body>
